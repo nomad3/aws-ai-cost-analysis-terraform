@@ -35,8 +35,15 @@ resource "aws_ce_anomaly_monitor" "cost_anomaly_monitor" {
 
 resource "aws_ce_anomaly_subscription" "cost_anomaly_subscription" {
   name      = "cost-anomaly-subscription-${var.environment}"
-  threshold = var.anomaly_detection_threshold
   frequency = "IMMEDIATE"
+
+  threshold_expression {
+    dimension {
+      key           = "ANOMALY_TOTAL_IMPACT_ABSOLUTE"
+      match_options = ["GREATER_THAN_OR_EQUAL"]
+      values        = [tostring(var.anomaly_detection_threshold_dollars)]
+    }
+  }
 
   monitor_arn_list = [
     aws_ce_anomaly_monitor.cost_anomaly_monitor.arn

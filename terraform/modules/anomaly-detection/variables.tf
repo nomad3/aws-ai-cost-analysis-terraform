@@ -8,10 +8,10 @@ variable "notification_email" {
   type        = string
 }
 
-variable "anomaly_detection_threshold" {
-  description = "Threshold percentage for cost anomaly detection"
+variable "anomaly_detection_threshold_dollars" {
+  description = "Dollar threshold for cost anomaly detection."
   type        = number
-  default     = 10
+  default     = 100
 }
 
 variable "tags" {

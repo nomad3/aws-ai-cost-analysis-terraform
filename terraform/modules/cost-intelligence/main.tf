@@ -52,4 +52,42 @@ resource "aws_athena_workgroup" "cost_analysis" {
       }
     }
   }
+}
+
+resource "aws_s3_bucket_policy" "cost_reports" {
+  bucket = aws_s3_bucket.cost_reports.id
+  policy = data.aws_iam_policy_document.cost_reports.json
+}
+
+data "aws_iam_policy_document" "cost_reports" {
+  statement {
+    sid    = "AllowCURDelivery"
+    effect = "Allow"
+    principals {
+      type        = "Service"
+      identifiers = ["billingreports.amazonaws.com"]
+    }
+    actions = [
+      "s3:GetBucketAcl",
+      "s3:GetBucketPolicy",
+    ]
+    resources = [
+      aws_s3_bucket.cost_reports.arn
+    ]
+  }
+
+  statement {
+    sid    = "AllowCURWriting"
+    effect = "Allow"
+    principals {
+      type        = "Service"
+      identifiers = ["billingreports.amazonaws.com"]
+    }
+    actions = [
+      "s3:PutObject",
+    ]
+    resources = [
+      "${aws_s3_bucket.cost_reports.arn}/*"
+    ]
+  }
 } 
