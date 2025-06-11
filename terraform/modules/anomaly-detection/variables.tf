@@ -8,6 +8,12 @@ variable "notification_email" {
   type        = string
 }
 
+variable "anomaly_monitor_type" {
+  description = "The type of anomaly monitor."
+  type        = string
+  default     = "DIMENSIONAL"
+}
+
 variable "anomaly_detection_threshold_dollars" {
   description = "Dollar threshold for cost anomaly detection."
   type        = number

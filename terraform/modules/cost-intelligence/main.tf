@@ -24,10 +24,10 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "cost_reports" {
 }
 
 resource "aws_cur_report_definition" "cost_usage_report" {
-  report_name                = "cost-usage-report-${var.environment}"
+  report_name                = var.cost_report_name
   time_unit                  = "HOURLY"
   format                     = "Parquet"
-  compression               = "Parquet"
+  compression                = "Parquet"
   additional_schema_elements = ["RESOURCES"]
   s3_bucket                 = aws_s3_bucket.cost_reports.id
   s3_region                 = var.aws_region
@@ -52,7 +52,7 @@ resource "aws_athena_workgroup" "cost_analysis" {
       }
     }
   }
-}
+} 
 
 resource "aws_s3_bucket_policy" "cost_reports" {
   bucket = aws_s3_bucket.cost_reports.id

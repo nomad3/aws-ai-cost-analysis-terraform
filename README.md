@@ -138,7 +138,7 @@ These steps will guide you through deploying the `dev` environment using a local
 After a successful `apply`, check the following in your AWS Console to ensure everything is working.
 
 *   **S3 Bucket:** Navigate to the S3 service. A bucket named `cost-analysis-poc-reports-9f8e7d-dev` should exist with a bucket policy allowing access to `billingreports.amazonaws.com`.
-*   **Cost & Usage Reports:** In the Billing and Cost Management service, find "Cost & Usage Reports". A report named `cost-usage-report-dev` should be present.
+*   **Data Exports (Cost & Usage Reports):** In the Billing and Cost Management service, find **Data Exports** in the left navigation pane. A report named `cost-usage-report-dev` should be present on the "Cost and Usage Reports" tab.
 *   **Cost Anomaly Detection:** In the Cost Management service, under "Cost Anomaly Detection", a monitor named `cost-anomaly-monitor-dev` should be active.
 *   **SNS Subscription:** In the SNS service, find the topic `cost-anomaly-alerts-dev`. Go to subscriptions and confirm your email subscription. You must click the confirmation link sent to your email.
 *   **Athena Workgroup:** In the Athena service, ensure the `cost-analysis-dev` workgroup is available.
@@ -149,7 +149,7 @@ After a successful `apply`, check the following in your AWS Console to ensure ev
 
 Once reports are being delivered, you can query them using Athena.
 
-1.  **Data Source & Table:** AWS automatically creates a data source and table in the Glue Data Catalog. You'll need to run a `CREATE TABLE` query one time to get started. The exact query can be found in the AWS Console under the Cost and Usage Reports settings page.
+1.  **Data Source & Table:** AWS automatically creates a data source and table in the Glue Data Catalog. You'll need to run a `CREATE TABLE` query one time to get started. The exact query can be found in the AWS Console on the details page for your report in **Data Exports**.
 2.  **Sample Queries:** Here are some example queries you can run in the Athena Query Editor under the `cost-analysis-dev` workgroup.
 
     **Query: Total cost per service for the last month**

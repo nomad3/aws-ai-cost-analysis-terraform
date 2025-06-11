@@ -13,6 +13,11 @@ variable "cost_report_bucket_name" {
   type        = string
 }
 
+variable "cost_report_name" {
+  description = "The name for the Cost and Usage Report."
+  type        = string
+}
+
 variable "tags" {
   description = "Additional tags to apply to resources"
   type        = map(string)
